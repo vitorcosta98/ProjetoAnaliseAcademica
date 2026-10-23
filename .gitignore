@@ -3,3 +3,6 @@
 
 ## Ignore diretórios de cache Python
 _pycache_/
+
+## Ignora pasta .venv
+.venv/

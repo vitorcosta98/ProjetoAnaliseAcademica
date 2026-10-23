@@ -1,9 +1,24 @@
 import pandas as pd
 from sqlalchemy import create_engine
+from pathlib import Path
 
-df = pd.read_csv("dados_editados.csv")
+BASE = Path(__file__).resolve().parent
+df = pd.read_csv(BASE/"dados_editados.csv")
 
-engine = create_engine('sqlite:///bancodados.db')
+df = df.rename(columns={
+    "Ingressante/Concluinte": "tipo",
+    "Nome": "nome",
+    "Nível de Ensino": "nivel",
+    "Curso": "curso",
+    "Campus": "campus",
+    "Situação de Matrícula": "situacao",
+    "Período de Ingresso": "periodo",
+})
+
+df["ano"] = df['periodo'].str[:4].astype(int)
+
+
+engine = create_engine(f'sqlite:///{BASE / 'bancodados.db'}')
 
 df.to_sql(
     name='DadosAlunos',
