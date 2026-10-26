@@ -16,10 +16,9 @@ def get(path, **params):
     return r.json()
 
 
-anos = get("/alunos/ano_ingresso")
-lista_anos = [ano['ano'] for ano in anos]
+opcoes = get("/alunos/opcoes")
 st.sidebar.header("Filtros")
-filtro_ano = st.sidebar.selectbox("Ano de Ingresso", ["Todos"] + lista_anos)
+filtro_ano = st.sidebar.selectbox("Ano de Ingresso", ["Todos"] + opcoes['ano_ingresso'])
 
 
 st.title("Análise Acadêmica")
