@@ -25,3 +25,8 @@ def get_cursos(db: Session = Depends(get_db)):
 @router.get("/cancelamento")
 def get_cancelamento(db: Session = Depends(get_db)):
     return service.cancelamento_por_campus(db)
+
+@router.get('/por-campus')
+def get_campus(tipo: str | None = None, nivel: str | None = None,
+               db: Session = Depends(get_db)):
+    return service.por_campus(db, tipo=tipo, nivel=nivel)
