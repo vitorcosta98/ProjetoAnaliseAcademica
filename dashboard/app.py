@@ -18,7 +18,8 @@ def get(path, **params):
 
 opcoes = get("/alunos/opcoes")
 st.sidebar.header("Filtros")
-filtro_ano = st.sidebar.selectbox("Ano de Ingresso", ["Todos"] + opcoes['ano_ingresso'])
+
+filtro_ano = st.sidebar.selectbox("Ano de Ingresso", [None] + opcoes['ano_ingresso'], format_func=lambda x: x or "Todos")
 filtro_curso = st.sidebar.selectbox("Curso", [None] + opcoes['cursos'], format_func=lambda x: x or 'Todos')
 filtro_tipo = st.sidebar.selectbox("Tipo", [None] + opcoes['tipos'], format_func=lambda x: x or 'Todos')
 
@@ -32,22 +33,20 @@ c3.metric("Ingressantes", f"{k['ingressantes']:,}".replace(",", '.'))
 c4.metric("Cursos", k['cursos'])
 
 col1, col2 = st.columns(2)
-df_campus = pd.DataFrame(get("/alunos/por-campus",tipo=filtro_tipo, curso=filtro_curso))
-
-print(df_campus)
+df_campus = pd.DataFrame(get("/alunos/por-campus",tipo=filtro_tipo, curso=filtro_curso, ano=filtro_ano))
 
 col1.plotly_chart(px.bar(df_campus, x="total", y='campus', orientation='h',
-                         title='Registros por Campus'), use_container_width="stretch")
+                         title='Registros por Campus'), width="stretch")
 
-df_cursos = pd.DataFrame(get("/alunos/top-cursos", limite=10, tipo=filtro_tipo))
+df_cursos = pd.DataFrame(get("/alunos/top-cursos", limite=10, tipo=filtro_tipo, ano=filtro_ano))
 col2.plotly_chart(px.bar(df_cursos, x='total', y='curso', orientation='h',
-                        title='Top 10 Cursos'), use_container_width="stretch")
+                        title='Top 10 Cursos'), width="stretch")
 
 df_ano = pd.DataFrame(get("/alunos/ano_ingresso", tipo=filtro_tipo))
 st.plotly_chart(px.line(df_ano, x='ano', y='total', title='Registros por Ano de Ingresso'),
-                use_container_width="stretch")
+                width="stretch")
 
 df_canc = pd.DataFrame(get("/alunos/cancelamento"))
 st.plotly_chart(px.bar(df_canc, x='campus', y="taxa_cancelamento",
                        title='Taxa de Cancelamento entre Ingressantes (%)'),
-                       use_container_width="stretch")
+                       width="stretch")
