@@ -35,7 +35,7 @@ c4.metric("Cursos", k['cursos'])
 col1, col2 = st.columns(2)
 df_campus = pd.DataFrame(get("/alunos/por-campus",tipo=filtro_tipo, curso=filtro_curso, ano=filtro_ano))
 
-col1.plotly_chart(px.bar(df_campus, x="total", y='campus', orientation='h',
+col1.plotly_chart(px.bar(df_campus, x="total", y='campus', text=df_campus['total'], orientation='h',
                          title='Registros por Campus'), width="stretch")
 
 df_cursos = pd.DataFrame(get("/alunos/top-cursos", limite=10, tipo=filtro_tipo, ano=filtro_ano))
