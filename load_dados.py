@@ -15,7 +15,7 @@ df = df.rename(columns={
     "Período de Ingresso": "periodo",
 })
 
-df["ano"] = df['periodo'].str[:4].astype(int)
+df["ano"] = df['periodo'].str[:4].astype(str)
 
 
 engine = create_engine(f'sqlite:///{BASE / 'bancodados.db'}')

@@ -14,9 +14,9 @@ def get_opcoes(db: Session = Depends(get_db)):
     return service.opcoes(db)
 
 @router.get("/top-cursos")
-def top_cursos(limite: int = Query(10, ge=1, le=50), campus: str | None = None,
+def top_cursos(limite: int = Query(10, ge=1, le=50), ano: str | None = None,
                tipo: str | None = None, db: Session = Depends(get_db)):
-    return service.top_cursos(db, limite, campus=campus, tipo=tipo)
+    return service.top_cursos(db, limite, ano=ano, tipo=tipo)
 
 @router.get("/ano_ingresso")
 def get_cursos(db: Session = Depends(get_db)):
@@ -28,5 +28,5 @@ def get_cancelamento(db: Session = Depends(get_db)):
 
 @router.get('/por-campus')
 def get_campus(tipo: str | None = None, curso: str | None = None,
-               db: Session = Depends(get_db)):
-    return service.por_campus(db, tipo=tipo, curso=curso)
+               ano: str | None = None,db: Session = Depends(get_db)):
+    return service.por_campus(db, tipo=tipo, curso=curso, ano=ano)

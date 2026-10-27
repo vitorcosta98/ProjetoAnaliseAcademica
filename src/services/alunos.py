@@ -14,12 +14,13 @@ def resumo(db):
     return dict(db.execute(q).one()._mapping)
 
 
-def _filtros(q, periodo=None, curso=None, campus=None, tipo=None, nivel=None):
+def _filtros(q, periodo=None, curso=None, campus=None, tipo=None, nivel=None, ano=None):
     if periodo: q = q.where(a.c.periodo == periodo)
     if curso: q = q.where(a.c.curso == curso)
     if campus: q = q.where(a.c.campus == campus)
     if tipo: q = q.where(a.c.tipo == tipo)
-    if nivel: q = q.where(a.c.novel==nivel)
+    if nivel: q = q.where(a.c.nivel == nivel)
+    if ano: q=q.where(a.c.ano == ano)
 
     return q
 
