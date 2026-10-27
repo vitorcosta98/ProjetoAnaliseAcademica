@@ -29,9 +29,7 @@ def opcoes(db):
     def distintos(col):
         return [r[0] for r in db.execute(select(col).distinct().order_by(col))]
 
-    return {"campi": distintos(a.c.campus),
-            "niveis":distintos(a.c.nivel),
-            "tipos":distintos(a.c.tipo),
+    return {"tipos":distintos(a.c.tipo),
             "cursos":distintos(a.c.curso),
             "ano_ingresso": distintos(a.c.ano)}
 
