@@ -32,19 +32,22 @@ c3.metric("Ingressantes", f"{k['ingressantes']:,}".replace(",", '.'))
 c4.metric("Cursos", k['cursos'])
 
 col1, col2 = st.columns(2)
-df_campus = pd.DataFrame(get("/alunos/por-campus",tipo=filtro_tipo))
+df_campus = pd.DataFrame(get("/alunos/por-campus",tipo=filtro_tipo, curso=filtro_curso))
+
+print(df_campus)
+
 col1.plotly_chart(px.bar(df_campus, x="total", y='campus', orientation='h',
-                         title='Registros por Campus'), use_container_width=True)
+                         title='Registros por Campus'), use_container_width="stretch")
 
 df_cursos = pd.DataFrame(get("/alunos/top-cursos", limite=10, tipo=filtro_tipo))
 col2.plotly_chart(px.bar(df_cursos, x='total', y='curso', orientation='h',
-                        title='Top 10 Cursos'), use_container_width=True)
+                        title='Top 10 Cursos'), use_container_width="stretch")
 
 df_ano = pd.DataFrame(get("/alunos/ano_ingresso", tipo=filtro_tipo))
 st.plotly_chart(px.line(df_ano, x='ano', y='total', title='Registros por Ano de Ingresso'),
-                use_container_width=True)
+                use_container_width="stretch")
 
 df_canc = pd.DataFrame(get("/alunos/cancelamento"))
 st.plotly_chart(px.bar(df_canc, x='campus', y="taxa_cancelamento",
                        title='Taxa de Cancelamento entre Ingressantes (%)'),
-                       use_container_width=True)
+                       use_container_width="stretch")
