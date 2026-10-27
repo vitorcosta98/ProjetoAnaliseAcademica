@@ -7,3 +7,5 @@ _pycache_/
 ## Ignora pasta .venv
 .venv/.venv/
 __pyache__/
+
+.pytest_cache/

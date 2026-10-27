@@ -3,8 +3,11 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from ..services import alunos as service
 from ..schema import Resumo, ItemCampus, ItemAno, Cancelamento
+from typing import Literal
 
 router = APIRouter(prefix="/alunos", tags=["alunos"])
+
+Tipo = Literal['Ingressante', 'Concluinte']
 
 @router.get("/resumo", response_model=Resumo, summary="Totais Gerais da Base.")
 def get_resumo(db: Session = Depends(get_db)):
@@ -28,6 +31,6 @@ def get_cancelamento(db: Session = Depends(get_db)):
     return service.cancelamento_por_campus(db)
 
 @router.get('/por-campus', response_model=list[ItemCampus], summary="Registros por Campus.")
-def get_campus(tipo: str | None = None, curso: str | None = None,
+def get_campus(tipo: Tipo | None = None, curso: str | None = None,
                ano: str | None = None,db: Session = Depends(get_db)):
     return service.por_campus(db, tipo=tipo, curso=curso, ano=ano)
