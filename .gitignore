@@ -5,4 +5,5 @@
 _pycache_/
 
 ## Ignora pasta .venv
-.venv/
+.venv/.venv/
+__pyache__/
