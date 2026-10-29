@@ -120,6 +120,7 @@ ProjetoAnaliseAcademica/
 ├── dados_editados.csv              # base tratada
 ├── docker-compose.yml
 ├── Dockerfile
+├── LICENSE
 ├── .dockerignore
 ├── .gitignore
 ├── load_dados.py                   # cria o banco a partir do CSV
@@ -146,7 +147,9 @@ ProjetoAnaliseAcademica/
 - Novos filtros e métricas (por exemplo, por nível de ensino)
 
 ## Licença
-Código sob licença MIT (ver `LICENSE`). Os dados seguem a licença PDDL da fonte original.
+Código sob licença [MIT](LICENSE).
+<br>
+Os dados seguem a licença PDDL da fonte original.([Alunos - Dados Abertos](https://dados.gov.br/dados/conjuntos-dados/12-alunos))
 
 ## Autor
 **Vitor Costa**: [LinkedIn](https://www.linkedin.com/in/vitorcosta98/) · [GitHub](https://github.com/vitorcosta98)
