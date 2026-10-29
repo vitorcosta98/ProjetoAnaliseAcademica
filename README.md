@@ -24,7 +24,7 @@ Desenvolvi esse projeto como um exercício de ETL, onde utilizei uma base de dad
 * Localizei mais de 30 mil registros, mas sem possibilidades de informar se são únicos, pois são dados parcialmente anonimizados;
 * São 107 cursos no total, com destaque para **TÉCNICO EM ELETROTÉCNICA** como o curso com mais registros, com 1727 registros;
 * O **CAMPUS NOVA SUÍÇA** é o campus com mais registros, 13.442 contra 6.368 do segundo colocado;
-* Foi observado que o número de registros aumentou ao longo do tempo, desde 1985 até 2022, observando que a partir de **2007** os registros anuais superaram 500 regristros por ano;
+* Os registros por ano de ingresso superam 500 por ano desde **2007**. Como a base reúne concluintes e os ingressantes de 2022, o gráfico mostra quando os concluintes entraram, e não a evolução das matrículas; o pico de 2022 vem em grande parte dos ingressantes;
 * O máximo percentual de cancelamento é de **10,7%** na unidade **CAMPUS NEPOMUCENO** e o mínimo foi **1%** na unidade **CAMPUS CONTAGEM**, observando que são amostras pequenas, então as taxas dos campi menores oscilam bastante;
 
 ## Arquitetura
@@ -80,11 +80,11 @@ streamlit run dashboard/app.py # terminal 2
 | Método | Rota | Descrição |
 |---|---|---|
 |GET| `/alunos/resumo` | Totais Gerais da Base|
-|GET| `/alunos/opcoes` | Valores Disponíveis Para os Filtros |
-|GET| `/alunos/top-cursos`| Cursos Com Mais Registros |
-|GET| `/alunos/ano_ingresso` | Registros Por Ano de Ingresso |
-|GET| `/alunos/cancelamento` | Taxa de Cancelamento Entre Ingressantes, Por Campus |
-|GET| `/alunos/por-campus` | Registros Por Campus |
+|GET| `/alunos/opcoes` | Valores Disponíveis para os Filtros |
+|GET| `/alunos/top-cursos`| Cursos com Mais Registros |
+|GET| `/alunos/ano_ingresso` | Registros por Ano de Ingresso |
+|GET| `/alunos/cancelamento` | Taxa de Cancelamento Entre Ingressantes, por Campus |
+|GET| `/alunos/por-campus` | Registros por Campus |
 
 ## Limitações dos Dados
 - Nomes anonimizados e abreviados: as contagens são de registros, e não de pessoas.
@@ -134,7 +134,7 @@ ProjetoAnaliseAcademica/
 
 ## Habilidades Exercitadas
 * Análise exploratória de dados com Pandas;
-* SQL e SQLAlchemy ;
+* SQL e SQLAlchemy;
 * Criação e validação de APIs (FastAPI e Pydantic);
 * Testes automatizados com Pytest;
 * Dashboards interativos com Streamlit e Plotly;
@@ -147,9 +147,7 @@ ProjetoAnaliseAcademica/
 - Novos filtros e métricas (por exemplo, por nível de ensino)
 
 ## Licença
-Código sob licença [MIT](LICENSE).
-<br>
-Os dados seguem a licença PDDL da fonte original.([Alunos - Dados Abertos](https://dados.gov.br/dados/conjuntos-dados/12-alunos))
+Código sob licença [MIT](LICENSE). Os dados seguem a licença PDDL da fonte original.([Alunos - Dados Abertos](https://dados.gov.br/dados/conjuntos-dados/12-alunos))
 
 ## Autor
 **Vitor Costa**: [LinkedIn](https://www.linkedin.com/in/vitorcosta98/) · [GitHub](https://github.com/vitorcosta98)
