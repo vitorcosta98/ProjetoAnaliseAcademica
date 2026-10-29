@@ -1,11 +1,6 @@
-# Ignore todos os arquivos com a extensão 
 *.pyc
-
-## Ignore diretórios de cache Python
 _pycache_/
-
-## Ignora pasta .venv
-.venv/.venv/
+.venv/
 __pyache__/
-
 .pytest_cache/
+*.db
