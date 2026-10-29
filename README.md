@@ -7,22 +7,25 @@
 [English version](README.en.md)
 
 ## Sobre
-Desenvolvi esse projeto como um exercício de ETL, onde utilizei uma base dados pública e construi uma API para alimentar um dashboard e responder algumas perguntas de acordo com o dataset proposto.
+Desenvolvi esse projeto como um exercício de ETL, onde utilizei uma base de dados pública e construí uma API para alimentar um dashboard e responder algumas perguntas de acordo com o dataset proposto.
 * Quantos registros existem na base?
 * Quantos cursos?
 * Qual campus com mais registros?
-* Qual o histórico de registros ao longo do tempo?
+* Como os registros se distribuem ao longo do tempo?
 * Qual a taxa de cancelamento entre ingressantes, por campus?
 
 **Fonte dos dados:** [Alunos - Dados Abertos](https://dados.gov.br/dados/conjuntos-dados/12-alunos). 
-(instituição: Controladoria-Geral da União, licença: Open Data Commons Public Domain Dedication and License (PDDL), acesso em: 20 outubro 2026). Base referente a 2022-2024.
+- Instituição: Controladoria-Geral da União
+- Licença: Open Data Commons Public Domain Dedication and License (PDDL)
+- Acesso em: 20 outubro 2026
+- Período da Base: 2022-2024.
 
-## Principais Insights:
+## Principais Insights
 * Localizei mais de 30 mil registros, mas sem possibilidades de informar se são únicos, pois são dados parcialmente anonimizados;
-* São 107 cursos no total, com destaque para **TÉCNICO EM ELETROTÉCNICA** como o curso com mais registros, com 1727 alunos registrados;
+* São 107 cursos no total, com destaque para **TÉCNICO EM ELETROTÉCNICA** como o curso com mais registros, com 1727 registros;
 * O **CAMPUS NOVA SUÍÇA** é o campus com mais registros, 13.442 contra 6.368 do segundo colocado;
-* Foi observado que o número de registros aumentou ao longo do tempo, desde 1985 até 2022, observando que a partir de **2005** os registros anuais superaram 500 regristros por ano;
-* O máximo percentual de cancelamento é de **10.7%** na unidade **CAMPUS NEPOMUCENO** e o mínimo foi **1%** na unidade **CAMPUS CONTAGEM**, observando que são amostras pequenas, então as taxas dos campi menores oscilam bastante;
+* Foi observado que o número de registros aumentou ao longo do tempo, desde 1985 até 2022, observando que a partir de **2007** os registros anuais superaram 500 regristros por ano;
+* O máximo percentual de cancelamento é de **10,7%** na unidade **CAMPUS NEPOMUCENO** e o mínimo foi **1%** na unidade **CAMPUS CONTAGEM**, observando que são amostras pequenas, então as taxas dos campi menores oscilam bastante;
 
 ## Arquitetura
 ```mermaid
@@ -55,15 +58,15 @@ flowchart LR
 Python, Pandas, SQLAlchemy, FastAPI, Pydantic, Streamlit, Plotly, Pytest, Docker.
 
 ## Como Rodar
+
+### Com Docker
 **Requisitos: Docker Compose**
-- Docker com Compose
 ```bash
 docker compose up --build
 ```
-
 API em `http://localhost:8000/docs` e dashboard em `http://localhost:8501`.
 
-**Localmente**
+### Localmente
 **Requisitos: Python 3.12.3**
 ```bash
 python -m venv .venv && source .venv/bin/activate
@@ -77,38 +80,38 @@ streamlit run dashboard/app.py # terminal 2
 | Método | Rota | Descrição |
 |---|---|---|
 |GET| `/alunos/resumo` | Totais Gerais da Base|
-|GET| `/alunos/opcoes` | Valores dos Disponíveis para os Filtros |
-|GET| `/alunos/top-cursos`| Cursos com mais Registros |
-|GET| `/alunos/ano_ingresso` | Registros por Ano de Ingresso |
-|GET| `/alunos/cancelamento` | Taxa de Cancelamento entre Ingressantes, por Campus |
-|GET| `/alunos/por-campus` | Registros por Campus |
+|GET| `/alunos/opcoes` | Valores Disponíveis Para os Filtros |
+|GET| `/alunos/top-cursos`| Cursos Com Mais Registros |
+|GET| `/alunos/ano_ingresso` | Registros Por Ano de Ingresso |
+|GET| `/alunos/cancelamento` | Taxa de Cancelamento Entre Ingressantes, Por Campus |
+|GET| `/alunos/por-campus` | Registros Por Campus |
 
 ## Limitações dos Dados
 - Nomes anonimizados e abreviados: as contagens são de registros, e não de pessoas.
 - A taxa de cancelamento considera só os ingressantes de 2022.
-- O período de ingresso vai até 1983,embora a base seja de 2022-2024.
+- O período de ingresso vai até 1983, embora a base seja de 2022-2024.
 
 ## Testes
 ```bash
-python load_dados.py    # Gera o banco consultados pelos testes
+python load_dados.py    # Gera o banco consultado pelos testes
 pytest
 ```
 
 ## Estrutura
 ```text
 ProjetoAnaliseAcademica/
+├── .github
+│   └── pull_request_template.md
 ├── dashboard
 │   └── app.py                      # dashboard Streamlit
 ├── docs
 │   └── dashboard.gif               # GIF usado no README
-├── .github
-│   └── pull_request_template.md
 ├── src
 │   ├── routes
-│   │   ├── alunos.py               # endpoints API
+│   │   └── alunos.py               # endpoints API
 │   ├── services
-│   │   ├── alunos.py               # consultas e agregações SQL
-│   ├── database.py                 # conexão com o banco 
+│   │   └── alunos.py               # consultas e agregações SQL
+│   ├── database.py                 # conexão com o banco
 │   ├── main.py                     # aplicação FastAPI
 │   └── schema.py                   # modelos Pydantic
 ├── tests
@@ -130,12 +133,20 @@ ProjetoAnaliseAcademica/
 
 ## Habilidades Exercitadas
 * Análise exploratória de dados com Pandas;
-* SQL e SQLAlchemy 
+* SQL e SQLAlchemy ;
 * Criação e validação de APIs (FastAPI e Pydantic);
 * Testes automatizados com Pytest;
 * Dashboards interativos com Streamlit e Plotly;
 * Docker e Docker Compose;
 * Git: Branches e Pull Requests;
+
+## Próximos passos
+- Deploy da API e do dashboard
+- Integração contínua com GitHub Actions
+- Novos filtros e métricas (por exemplo, por nível de ensino)
+
+## Licença
+Código sob licença MIT (ver `LICENSE`). Os dados seguem a licença PDDL da fonte original.
 
 ## Autor
 **Vitor Costa**: [LinkedIn](https://www.linkedin.com/in/vitorcosta98/) · [GitHub](https://github.com/vitorcosta98)
