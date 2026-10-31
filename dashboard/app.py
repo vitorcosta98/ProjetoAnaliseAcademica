@@ -52,7 +52,7 @@ try:
     fig_campus.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
     fig_campus.update_yaxes(title=None)
     col1.plotly_chart(fig_campus,width="stretch")
-except:
+except Exception:
     col1.text("Sem dados para os filtros selecionados.")
 
 
@@ -66,7 +66,7 @@ try:
     fig_cursos.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
     fig_cursos.update_yaxes(title=None)
     col2.plotly_chart(fig_cursos,width="stretch")
-except:
+except Exception:
     col2.text("Sem dados para os filtros selecionados.")
 
 df_ano = pd.DataFrame(get("/alunos/ano_ingresso"))
