@@ -69,9 +69,9 @@ try:
 except:
     col2.text("Sem dados para os filtros selecionados.")
 
-df_ano = pd.DataFrame(get("/alunos/ano_ingresso", tipo=filtro_tipo))
+df_ano = pd.DataFrame(get("/alunos/ano_ingresso"))
 if df_ano.empty:
-    st.info("Sem dados de ano de ingresso para o tipo selecionado")
+    st.info("Sem dados para exibir esse visual.")
 else:
     st.plotly_chart(px.line(df_ano, x='ano', y='total', title='Registros por Ano de Ingresso'),
                 width="stretch")
